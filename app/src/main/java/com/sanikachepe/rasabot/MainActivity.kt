@@ -2,6 +2,7 @@ package com.sanikachepe.rasabot
 
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -50,12 +51,13 @@ class MainActivity : AppCompatActivity() {
             adapter.notifyDataSetChanged()
         }
         val okHttpClient = OkHttpClient()
-        val retrofit = Retrofit.Builder().baseUrl("https://a75477863471.ngrok.io/webhooks/rest/").client(okHttpClient).addConverterFactory(GsonConverterFactory.create()).build()
+        val retrofit = Retrofit.Builder().baseUrl("https://a1ec67147169.ngrok.io/webhooks/rest/").client(okHttpClient).addConverterFactory(GsonConverterFactory.create()).build()
         val messagerSender=retrofit.create(MessageSender::class.java)
         val response = messagerSender.messageSender(userMessage)
         response.enqueue(object: Callback<ArrayList<BotResponse>>{
             override fun onResponse(call: Call<ArrayList<BotResponse>>, response: Response<ArrayList<BotResponse>>) {
                 if(response.body() != null || response.body()!!.size != 0){
+                    Log.e("message","${response.body()!![0].text}")
                     val message = response.body()!![0]
                     messageList.add(MessageClass(message.text,BOT))
                     adapter.notifyDataSetChanged()
