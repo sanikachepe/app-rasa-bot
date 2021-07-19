@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
             adapter.notifyDataSetChanged()
         }
         val okHttpClient = OkHttpClient()
-        val retrofit = Retrofit.Builder().baseUrl("https://rasa-horizon733.cloud.okteto.net/webhooks/rest/").client(okHttpClient).addConverterFactory(GsonConverterFactory.create()).build()
+        val retrofit = Retrofit.Builder().baseUrl("https://your-url/webhooks/rest/").client(okHttpClient).addConverterFactory(GsonConverterFactory.create()).build()
         val messagerSender=retrofit.create(MessageSender::class.java)
         val response = messagerSender.messageSender(userMessage)
         response.enqueue(object: Callback<ArrayList<BotResponse>>{
