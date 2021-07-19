@@ -10,7 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start|center_vertical"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/design_default_color_secondary">
         <TextView
             android:id="@+id/message_tv"
             android:layout_width="wrap_content"
